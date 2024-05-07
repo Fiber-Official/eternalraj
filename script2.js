@@ -30,9 +30,14 @@ function sendDataToServer(name, ip) {
         method: 'POST',
         body: JSON.stringify({ name: name, ip: ip, location: 'Location Data' }) 
     })
-    .then(() => {
-        formContainer.style.display = 'none'; // Hide form after submission
-        window.location.href = 'home.html'; // Redirect to home.html
+    .then(response => response.text()) // Get the text response 
+    .then(responseText => {
+        if (responseText === 'success' && name === 'Raj') {
+            formContainer.style.display = 'none';
+            window.location.href = 'home.html'; 
+        } else {
+            alert('This site is not made for you.');
+        }
     })
     .catch(error => console.error('Error:', error));
 }
