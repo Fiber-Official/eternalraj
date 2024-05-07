@@ -1,7 +1,37 @@
-#form-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border: lightblue;
-    /* Add more styling */
+.form-container {
+    text-align: center;
+    margin-top: 100px;
+}
+
+.name-form {
+    display: inline-block;
+    border: 2px solid #9b6fce;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.name-form label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.name-form input[type="text"] {
+    width: 200px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.name-form button {
+    background-color: #9b6fce;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.name-form button:hover {
+    background-color: #7d47a0;
 }
