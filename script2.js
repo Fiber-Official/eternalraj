@@ -2,42 +2,33 @@ const submitButton = document.getElementById('submit-name');
 const nameInput = document.getElementById('name-input');
 const formContainer = document.getElementById('form-container');
 
-// Check if visitor has already submitted their name
 if (localStorage.getItem('visitorName')) {
-    formContainer.style.display = 'none'; // Hide the form
+    formContainer.style.display = 'none'; // Hide the form if name is already stored
 } else {
-    submitButton.addEventListener('click', () => {
+    document.getElementById('nameForm').addEventListener('submit', (event) => {
+        event.preventDefault();
         const name = nameInput.value;
         if (name) {
-            // Store the name in local storage for future visits
             localStorage.setItem('visitorName', name);
-
-            // Get location and IP address (Requires external service)
-            fetch('https://api.ipify.org?format=json')  // Example IP service
-                .then(response => response.json())
-                .then(data => sendDataToServer(name, data.ip)); 
+            fetch('store_data.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ name: name }) 
+            })
+            .then(response => response.text()) // Get the text response 
+            .then(responseText => {
+                if (responseText === 'success' && (name === 'Raj' || name === 'Fiber')) {
+                    formContainer.style.display = 'none'; // Hide the form
+                    window.location.href = 'home.html'; // Redirect to home page
+                } else {
+                    alert('This site is not made for you.');
+                }
+            })
+            .catch(error => console.error('Error:', error));
         } else {
             alert('Please enter your name');
         }
     });
-}
-
-function sendDataToServer(name, ip) {
-    // You'll likely need to use something like 'fetch' with geoloacation services to get accurate location data
-
-    // Send data to server-side script 
-    fetch('store_data.php', {
-        method: 'POST',
-        body: JSON.stringify({ name: name, ip: ip, location: 'Location Data' }) 
-    })
-    .then(response => response.text()) // Get the text response 
-    .then(responseText => {
-        if (responseText === 'success' && name === 'Raj') {
-            formContainer.style.display = 'none';
-            window.location.href = 'home.html'; 
-        } else {
-            alert('This site is not made for you.');
-        }
-    })
-    .catch(error => console.error('Error:', error));
 }
