@@ -32,6 +32,7 @@ function sendDataToServer(name, ip) {
     })
     .then(() => {
         formContainer.style.display = 'none'; // Hide form after submission
+        window.location.href = 'home.html'; // Redirect to home.html
     })
     .catch(error => console.error('Error:', error));
 }
