@@ -12,10 +12,13 @@
     <link rel="icon" type="image/x-icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEmdhMivD5NM5mhZidgRl2wcnUYSE9HRIx8w&usqp=CAU">
 </head>
 <body>
-    <div id="form-container"> 
-        <h2>Hello! What's your name?</h2> 
-        <input type="text" id="name-input">
-        <button id="submit-name">Submit</button>
+    <div id="form-container" class="form-container">
+        <h2>Welcome to the Website</h2>
+        <form id="nameForm" class="name-form">
+            <label for="name-input">Enter your name:</label>
+            <input type="text" id="name-input" required>
+            <button type="submit" id="submit-name">Submit</button>
+        </form>
     </div>
   
     <script src="script2.js"></script>
